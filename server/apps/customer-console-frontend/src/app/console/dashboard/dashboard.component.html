@@ -1,0 +1,60 @@
+<app-content>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      Project Info
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <dl class="row mb-0">
+            <div class="col-sm-4 text-sm-right">
+              <dt>Project Name:</dt>
+            </div>
+            <div class="col-sm-8 text-sm-left">
+              <dd class="mb-1">
+                <a class="text-navy" (click)="changeProject(projectInfo.id)">{{projectInfo.name}}</a>
+              </dd>
+            </div>
+          </dl>
+          <dl class="row mb-0">
+            <div class="col-sm-4 text-sm-right">
+              <dt>AppId:</dt>
+            </div>
+            <div class="col-sm-8 text-sm-left">
+              <dd class="mb-1">{{projectInfo.appId}}</dd>
+            </div>
+          </dl>
+          <dl class="row mb-0">
+            <div class="col-sm-4 text-sm-right">
+              <dt>Secret Key:</dt>
+            </div>
+            <div class="col-sm-8 text-sm-left">
+              <dd class="mb-1">{{projectInfo.secretKey}}</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="col-lg-6">
+          <dl class="row mb-0">
+            <div class="col-sm-4 text-sm-right">
+              <dt>Your Role:</dt>
+            </div>
+            <div class="col-sm-8 text-sm-left">
+              <dd class="mb-1">{{curUserRole}}</dd>
+            </div>
+          </dl>
+          <dl class="row mb-0">
+            <div class="col-sm-4 text-sm-right">
+              <dt>Users:</dt>
+            </div>
+            <div class="col-sm-8 text-sm-left">
+              <dd class="mb-1">
+                {{projectInfo.userCount}}
+                <a class="text-navy" (click)="changeProject(projectInfo.id)">manage</a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-content>

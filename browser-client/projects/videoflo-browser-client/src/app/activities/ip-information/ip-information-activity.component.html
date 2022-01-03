@@ -1,0 +1,171 @@
+<mat-card-header>
+  <mat-card-title>IP Address Information</mat-card-title>
+</mat-card-header>
+<mat-card-content>
+  <div *ngIf="isGatheringData">
+    Please wait. Verifying your IP Address...
+    <br />
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  <div *ngIf="shouldDisplayResults && !isIpInfoFetched">
+    Fetching IP Verification data...
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  <table
+    class="table is-striped"
+    style="width: 100%"
+    *ngIf="shouldDisplayResults && isIpInfoFetched"
+  >
+    <tbody>
+      <tr>
+        <td>IP Address</td>
+        <td>{{ ipInfo?.ip }}</td>
+      </tr>
+      <tr>
+        <td>Internet Provider</td>
+        <td>{{ ipInfo?.asn?.name }}</td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td>{{ ipInfo?.city }}</td>
+      </tr>
+      <tr>
+        <td>Country</td>
+        <td>{{ ipInfo?.country_name }}</td>
+      </tr>
+      <tr>
+        <td>Est. Lat/Lng</td>
+        <td>{{ ipInfo?.latitude }}, {{ ipInfo?.longitude }}</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <h3>Threat Assessment</h3>
+          <div
+            [ngClass]="{
+              'alert-danger': ipInfo?.threat?.is_threat,
+              'alert-success text-dark': !ipInfo?.threat?.is_threat
+            }"
+            class="alert"
+          >
+            <div class="alert-title">Threat</div>
+            <span *ngIf="ipInfo?.threat?.is_threat"
+              >The client's IP Address might be malicious! See below for more
+              details.</span
+            >
+            <span *ngIf="!ipInfo?.threat?.is_threat"
+              >The client's IP Address seems to be clean.</span
+            >
+          </div>
+          <div
+            [ngClass]="{
+              'alert-danger': ipInfo?.threat?.is_anonymous,
+              'alert-success text-dark': !ipInfo?.threat?.is_anonymous
+            }"
+            class="alert"
+          >
+            <div class="alert-title">
+              <span *ngIf="!ipInfo?.threat?.is_anonymous">Not</span> Anonymous
+            </div>
+            <span *ngIf="ipInfo?.threat?.is_anonymous"
+              >The client's IP Address seems to be an exit node or relay for an
+              anonymization service such as Tor!</span
+            >
+          </div>
+          <div
+            [ngClass]="{
+              'alert-danger': ipInfo?.threat?.is_proxy,
+              'alert-success text-dark': !ipInfo?.threat?.is_proxy
+            }"
+            class="alert"
+          >
+            <div class="alert-title">
+              Is using Proxy Anonymization?
+              <span *ngIf="!ipInfo?.threat?.is_proxy">No</span>
+            </div>
+            <span *ngIf="ipInfo?.threat?.is_proxy"
+              >The client's IP Address seems to be an exit node or relay for an
+              anonymization service!</span
+            >
+          </div>
+          <div
+            [ngClass]="{
+              'alert-danger': ipInfo?.threat?.is_tor,
+              'alert-success text-dark': !ipInfo?.threat?.is_tor
+            }"
+            class="alert"
+          >
+            <div class="alert-title">
+              Is using Tor Anonymization?
+              <span *ngIf="!ipInfo?.threat?.is_tor">No</span>
+            </div>
+            <span *ngIf="ipInfo?.threat?.is_tor"
+              >The client's IP Address seems to be an exit node or relay for Tor
+              anonymization service!</span
+            >
+          </div>
+          <div
+            [ngClass]="{
+              'alert-danger': ipInfo?.threat?.is_known_abuser,
+              'alert-success text-dark': !ipInfo?.threat?.is_known_abuser
+            }"
+            class="alert"
+          >
+            <div class="alert-title">
+              Known Abuser?
+              <span *ngIf="!ipInfo?.threat?.is_known_abuser">No</span>
+            </div>
+            <span *ngIf="ipInfo?.threat?.is_known_abuser"
+              >The client's IP address is a known (reported) source of
+              abuse!</span
+            >
+          </div>
+          <div
+            [ngClass]="{
+              'alert-danger': ipInfo?.threat?.is_known_attacker,
+              'alert-success text-dark': !ipInfo?.threat?.is_known_attacker
+            }"
+            class="alert"
+          >
+            <div class="alert-title">
+              Known Attacker?
+              <span *ngIf="!ipInfo?.threat?.is_known_attacker">No</span>
+            </div>
+            <span *ngIf="ipInfo?.threat?.is_known_attacker"
+              >The client's IP address is a known (reported) source of malicious
+              activity!</span
+            >
+          </div>
+          <div
+            [ngClass]="{
+              'alert-danger': ipInfo?.threat?.is_bogon,
+              'alert-success text-dark': !ipInfo?.threat?.is_bogon
+            }"
+            class="alert"
+          >
+            <div class="alert-title">
+              Bogus IP Address?
+              <span *ngIf="!ipInfo?.threat?.is_bogon">No</span>
+            </div>
+            <span *ngIf="ipInfo?.threat?.is_bogon"
+              >The client's IP address is not in any range allocated or
+              delegated by the Internet Assigned Numbers Authority (IANA) or a
+              delegated regional Internet registry (RIR) and allowed for public
+              Internet use. This could be an indicator of malicious
+              activity!</span
+            >
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-card-content>
+<mat-card-actions *ngIf="shouldDisplayResults">
+  <button mat-raised-button color="warn" (click)="onRejectClicked()">
+    Reject
+  </button>
+  <button mat-raised-button color="primary" (click)="onNextClicked()">
+    Next
+  </button>
+</mat-card-actions>

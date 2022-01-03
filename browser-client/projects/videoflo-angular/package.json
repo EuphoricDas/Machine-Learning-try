@@ -1,0 +1,23 @@
+{
+  "name": "@botaiml/videoflo-angular",
+  "description": "Videoflo Angular Client",
+  "author": "BOT AI ML Pvt. Ltd.",
+  "version": "0.2.11",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/botaiml/videoflo-sdk"
+  },
+  "dependencies": {
+    "@angular/animations": "10.1.2",
+    "@angular/cdk": "10.2.2",
+    "@angular/flex-layout": "10.0.0-beta.32",
+    "@angular/material": "10.2.2",
+    "linkifyjs": "2.1.9",
+    "openvidu-browser": "2.18.0"
+  },
+  "peerDependencies": {
+    "@angular/common": "10.1.2",
+    "@angular/core": "10.1.2"
+  }
+}

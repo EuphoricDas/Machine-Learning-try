@@ -1,0 +1,86 @@
+<div class="loginColumns animated fadeInDown">
+  <div class="row">
+
+    <div class="col-md-6">
+      <h2 class="font-bold">Welcome to <a [routerLink]="['/']">Videoflo</a></h2>
+
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard dummy text ever since the 1500s.
+      </p>
+
+      <p>
+        When an unknown printer took a galley of type and scrambled it to make a type specimen book.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3>Login</h3>
+        </div>
+        <div class="card-body">
+          <form (submit)="onSubmit()" [formGroup]="form" role="form">
+            <div class="form-group p-grid">
+              <div class="p-field m-t-lg">
+                <span class="p-float-label">
+                  <input pInputText #email id="email" formControlName="email" type="email" name="email"
+                    class="form-control" autocomplete="username"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.invalid && (f.email.touched || f.email.dirty) }">
+                  <label for="email">Email</label>
+                </span>
+              </div>
+              <div class="text-danger"
+                *ngIf="submitted && f.email.invalid && f.email.errors.required && (f.email.touched || f.email.dirty)">
+                Please enter your email id.
+              </div>
+              <div class="text-danger"
+                *ngIf="submitted && f.email.invalid && f.email.errors.email && (f.email.touched || f.email.dirty)">
+                Please enter a valid email id
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="p-field m-t-lg">
+                <span class="p-float-label">
+                  <input pInputText id="password" formControlName="password" type="password" class="form-control" autocomplete="current-password"
+                    name="password" [ngClass]="{ 'is-invalid': submitted && f.email.invalid && (f.email.touched || f.email.dirty) }">
+                  <label for="password">Password</label>
+                </span>
+              </div>
+              <div class="text-danger" *ngIf="submitted && f.password.invalid && (f.password.touched || f.password.dirty)">
+                Please enter your password.
+              </div>
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-primary block full-width m-b" [disabled]="isSubmitting">Login</button>
+            </div>
+            <div class="float-right">
+              <a href="#">
+                <small>Forgot password?</small>
+              </a>
+            </div>
+
+          </form>
+        </div>
+        <div class="card-footer">
+          <p class="text-muted text-center">
+            <small>Do not have an account?</small>
+          </p>
+          <a class="btn btn-sm btn-white btn-block" [routerLink]="['/home']" fragment="get-started">Create an
+            account</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      BOT AI ML Pvt. Ltd.
+    </div>
+    <div class="col-md-6 text-right">
+      <small>2020-21</small>
+    </div>
+  </div>
+</div>
+<p-messages></p-messages>

@@ -1,0 +1,26 @@
+<div #toolbar class="operations-display">
+  <div class="operations-bg">
+    <div class="icon-holder {{
+      isWebcamAudioEnabled ? 'icon-styles-active' : 'icon-styles-inactive'
+    }}" (click)="toggleMicrophone()">
+      <mat-icon class="icon-size">{{
+        isWebcamAudioEnabled ? 'mic' : 'mic_off'
+        }}</mat-icon>
+    </div>
+    <div class="icon-holder    {{
+      isWebcamVideoEnabled ? 'icon-styles-active' : 'icon-styles-inactive'
+    }}" (click)="toggleCamera()">
+      <mat-icon class="icon-size">{{
+        isWebcamVideoEnabled ? 'videocam' : 'videocam_off'
+        }}</mat-icon>
+    </div>
+    <div class="call-hangup-holder icon-styles-active" (click)="leaveSession()">
+      <mat-icon class="icon-size">call_end</mat-icon>
+    </div>
+
+    <div *ngIf="foundCameras && foundCameras.length > 1 && foundCameras.length < 3"
+      class="icon-holder icon-styles-active" (click)="switchCamera()">
+      <mat-icon class="icon-size">settings_backup_restore</mat-icon>
+    </div>
+  </div>
+</div>

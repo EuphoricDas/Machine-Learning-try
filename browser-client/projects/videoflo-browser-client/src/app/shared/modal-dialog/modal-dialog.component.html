@@ -1,0 +1,7 @@
+<div>
+	<h1 mat-dialog-title>{{ data.header }}</h1>
+	<div mat-dialog-content>
+		<mat-progress-bar *ngIf="data.showProgressBar" mode="indeterminate"></mat-progress-bar>
+		<h3 class="mt-2">{{ data.message }}</h3>
+	</div>
+</div>

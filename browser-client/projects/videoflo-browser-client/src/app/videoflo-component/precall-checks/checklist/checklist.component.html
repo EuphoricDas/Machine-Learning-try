@@ -1,0 +1,20 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title *ngIf="!!checklistConfig?.title">{{ checklistConfig?.title }}</mat-card-title>
+		<mat-card-subtitle *ngIf="!!checklistConfig?.subTitle">{{checklistConfig?.subTitle}}</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-content>
+		<div *ngIf="!!checklistConfig?.body" [outerHTML]="checklistConfig?.body"></div>
+		<mat-selection-list #checklistItems>
+			<mat-list-option *ngFor="let item of checklistConfig?.items" checkboxPosition="before">
+				{{item}}
+			</mat-list-option>
+		</mat-selection-list>
+	</mat-card-content>
+	<mat-card-actions align="end">
+		<button mat-raised-button color="primary" (click)="onContinueClick()"
+			[disabled]="!hasCheckListItems && checklistItems?.selectedOptions?.selected?.length < checklistConfig?.items?.length">
+			{{checklistConfig?.continueButtonText}}
+		</button>
+	</mat-card-actions>
+</mat-card>

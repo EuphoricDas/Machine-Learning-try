@@ -1,0 +1,8 @@
+{
+  "$schema": "node_modules/ng-openapi-gen/ng-openapi-gen-schema.json",
+  "input": "http://localhost:3333/client-api-docs-json",
+  "output": "projects/videoflo-browser-client/src/app/api",
+  "ignoreUnusedModels": false,
+	"templates": "projects/videoflo-browser-client/src/app/api-templates",
+	"skipJsonSuffix": true
+}

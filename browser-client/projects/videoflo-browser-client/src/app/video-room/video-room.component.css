@@ -1,0 +1,60 @@
+html {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+.video-container {
+  background-color: #494949;
+  padding: 0;
+  margin: 0;
+	transition: height 0.5s;
+}
+
+.side-bar-container {
+  background-color: #ffffff;
+  padding: 0;
+  margin: 0;
+	overflow: auto !important;
+	transition: height 0.5s;
+}
+
+.bounds {
+  box-sizing: border-box;
+}
+
+.stream-container {
+  padding: 0;
+}
+
+.reconnecting-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: black;
+  opacity: 80%;
+  position: absolute;
+}
+
+.mat-drawer-container {
+  background-color: #494949;
+}
+
+.mat-tab-class {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.boundsLight {
+  background-color: #dfdfdf !important;
+}
+
+.custom-class {
+  min-height: 0px !important;
+}

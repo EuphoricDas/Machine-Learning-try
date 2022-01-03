@@ -1,0 +1,15 @@
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
+			<videoflo-call-consent *ngIf="!consentCompleted" [consentConfig]="precallChecks?.consent"
+				(onConsentAcquired)="onConsentAcquired()"></videoflo-call-consent>
+
+			<videoflo-device-permissions *ngIf="consentCompleted && !devicePermissionsCompleted"
+				(onPermissionsAcquired)="onPermissionsAcquired($event)" [permissionsConfig]="precallChecks?.devicePermissions">
+			</videoflo-device-permissions>
+
+			<videoflo-checklist *ngIf="consentCompleted && devicePermissionsCompleted && !allChecklistsCompleted"
+				[checklistConfig]="currentChecklist" (onChecklistCompleted)="onCustomChecklistCompleted($event)"></videoflo-checklist>
+		</div>
+	</div>
+</div>

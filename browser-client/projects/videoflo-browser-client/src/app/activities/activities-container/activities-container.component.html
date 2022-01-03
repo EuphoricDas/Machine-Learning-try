@@ -1,0 +1,8 @@
+<mat-card id="workflowActivitiesContainer">
+  <ng-template dynamicComponentHost></ng-template>
+  <videoflo-finish
+    [workflowData]="workflowData"
+    *ngIf="isActivitiesExhausted"
+    (workflowEnded)="onWorkflowEnded($event)"
+  ></videoflo-finish>
+</mat-card>

@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@botaiml-videoflo/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@botaiml-videoflo/common-controllers": ["libs/common-controllers/src/index.ts"],
+      "@botaiml-videoflo/decorators": ["libs/decorators/src/index.ts"],
+      "@botaiml-videoflo/entities": ["libs/entities/src/index.ts"],
+      "@botaiml-videoflo/users-service": ["libs/users-service/src/index.ts"]
+    }
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  },
+  "exclude": ["node_modules", "tmp"]
+}

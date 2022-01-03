@@ -1,0 +1,3 @@
+@import url('./assets/bootstrap.css');
+@import url('node_modules/@angular/material/prebuilt-themes/indigo-pink.css');
+@import url('./index.minimal.css');

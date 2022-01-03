@@ -1,0 +1,153 @@
+<app-content>
+  <p-messages></p-messages>
+  <form (submit)="onSubmit()" [formGroup]="form" role="form" *ngIf="form">
+    <div class="row equal-height">
+      <div class="col-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            General Settings
+          </div>
+          <div class="panel-body">
+            <dl class="row mb-3" *ngIf="!createNew">
+              <div class="col-2 text-sm-right">
+                <dt>App ID:</dt>
+              </div>
+              <div class="col-10 text-sm-left">
+                <dd class="mb-1">{{projectInfo?.appId}}</dd>
+              </div>
+            </dl>
+
+            <dl class="row mb-0">
+              <div class="col-2 text-sm-right">
+                <dt><label for="projectName" class="p-h-xs">Project Name:</label></dt>
+              </div>
+              <div class="col-10 text-sm-left">
+                <dd class="mb-1">
+                  <input pInputText id="projectName" formControlName="projectName" type="text" name="projectName"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.projectName.invalid }">
+                  <div class="text-danger"
+                    *ngIf="submitted && f.projectName.invalid && f.projectName.errors.required">
+                    Please enter the project name.
+                  </div>
+                </dd>
+              </div>
+            </dl>
+
+            <dl class="row mb-0">
+              <div class="col-2 text-sm-right">
+                <dt><label for="projectDescription" class="p-h-xs">Description:</label></dt>
+              </div>
+              <div class="col-10 text-sm-left">
+                <dd class="mb-1">
+                  <textarea pInputTextarea id="projectDescription" formControlName="projectDescription" type="text"
+                    name="projectDescription" class="form-control" [autoResize]="true" rows="2"></textarea>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div class="col-6" *ngIf="!createNew">
+        <div class="panel panel-warning">
+          <div class="panel-heading">
+            API Credentials
+          </div>
+          <div class="panel-body">
+            <dl class="row mb-0">
+              <div class="col-2 text-sm-right">
+                <dt><label for="appId" class="p-h-xs">App ID:</label></dt>
+              </div>
+              <div class="col-10 text-sm-left">
+                <dd class="mb-1">
+                  <div class="input-group">
+                    <input pInputText type="text" id="appId" name="appId" [value]="projectInfo?.appId"
+                      class="form-control" readonly>
+                    <span class="input-group-append">
+                      <button type="button" (click)="copyAppId()" class="btn btn-default" pTooltip="Click to copy"
+                        tooltipPosition="top"><i class="fa fa-copy"></i></button>
+                    </span>
+                  </div>
+                  <span class="form-text text-info">
+                    Used to authenticate with the REST and Client API
+                  </span>
+                </dd>
+              </div>
+            </dl>
+            <dl class="row m-t-md mb-0">
+              <div class="col-2 text-sm-right">
+                <dt><label for="secretKey" class="p-h-xs">Secret Key:</label></dt>
+              </div>
+              <div class="col-10 text-sm-left">
+                <dd class="mb-1">
+                  <div class="input-group">
+                    <span class="input-group-prepend">
+                      <button type="button" (click)="toggleSecretDisplay()" class="btn btn-default"
+                        pTooltip="Click to view" tooltipPosition="top"><i class="fa fa-eye"></i></button>
+                    </span>
+                    <input pInputText #secretKeyInput type="password" id="secretKey" name="secretKey"
+                      [value]="projectInfo?.secretKey" class="form-control" readonly>
+                    <span class="input-group-append">
+                      <button type="button" (click)="copySecretKey()" class="btn btn-default" *ngIf="isSecretVisible"><i
+                          class="fa fa-copy" pTooltip="Click to copy" tooltipPosition="top"></i></button>
+                    </span>
+                  </div>
+                  <span class="form-text text-danger">
+                    Keep this somewhere safe and secure
+                  </span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row equal-height m-t-md">
+      <div class="col-6">
+        <div class="ibox ">
+          <div class="ibox-title">
+            <h5>Workflow Roles</h5>
+            <div class="ibox-tools">
+              <a (click)="addNewRole()"><i class="fa fa-plus"></i></a>
+            </div>
+          </div>
+          <div class="ibox-content">
+            <table class="table table-striped" *ngIf="roles.controls.length > 0">
+              <tbody>
+                <tr *ngFor="let role of roles.controls; let i = index">
+                  <td style="vertical-align: middle;">
+                    <h3>{{i+1}}</h3>
+                  </td>
+                  <td>
+                    <app-workflow-role-editor [roleFormGroup]="role" [submitted]="submitted">
+                    </app-workflow-role-editor>
+                  </td>
+                  <td style="vertical-align: middle;">
+                    <button type="button" (click)="onRoleDeleted(i)" class="btn btn-outline btn-sm btn-danger"><i
+                        class="fa fa-trash-o"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-danger"
+              *ngIf="submitted && f.roles && f.roles.invalid && f.roles.errors.required">
+              Please define the roles of the person's participating in the call for your workflow.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <p-toolbar>
+      <div class="p-toolbar-group-left">
+        <button type="submit" class="btn btn-w-m btn-success" [disabled]="isSubmitting">Save</button>
+        &nbsp;
+        <a [routerLink]="['/console']" (click)="onCancel()" class="btn btn-w-m btn-link text-muted">Cancel</a>
+      </div>
+      <div class="p-toolbar-group-right">
+        <a class="text-danger">Close this Project</a>
+      </div>
+    </p-toolbar>
+  </form>
+</app-content>

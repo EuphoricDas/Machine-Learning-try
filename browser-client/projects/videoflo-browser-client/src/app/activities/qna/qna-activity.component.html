@@ -1,0 +1,42 @@
+<mat-card class="workflow-item-card">
+  <mat-card-header>
+    <mat-card-title>{{ config?.title }}</mat-card-title>
+    <mat-card-subtitle>{{ config?.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content *ngIf="shouldDisplayResults">
+    <div *ngFor="let qnaPair of questions">
+      <div class="row">
+        <div class="col-8">
+          <h3 class="m-0">{{ qnaPair.question }}</h3>
+          <h3 class="m-0 text-info">
+            {{ qnaPair.expectedAnswer }}
+          </h3>
+        </div>
+        <div class="col-4 pt-1">
+          <div *ngIf="!qnaPair.isAnswered" class="text-right">
+            <button mat-mini-fab color="primary" (click)="onAnswered(true)">
+              <mat-icon>check_circle</mat-icon>
+            </button>
+            &nbsp;
+            <button mat-mini-fab color="warn" (click)="onAnswered(false)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="qnaPair.isAnswered" class="text-center">
+            <mat-icon color="primary" *ngIf="qnaPair.isAnswerCorrect">check_circle</mat-icon>
+            <mat-icon color="accent" *ngIf="!qnaPair.isAnswerCorrect">cancel</mat-icon>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-card-content>
+  <mat-card-actions *ngIf="shouldDisplayResults && allQuestionsCompleted">
+    <button mat-raised-button color="warn" (click)="onRejectClicked()">
+      Reject
+    </button>
+    <button mat-raised-button color="primary" (click)="onNextClicked()">
+      Next
+    </button>
+  </mat-card-actions>
+</mat-card>

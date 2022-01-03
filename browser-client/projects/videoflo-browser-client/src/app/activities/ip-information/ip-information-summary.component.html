@@ -1,0 +1,26 @@
+<div class="alert alert-light">
+  <h2 class="alert-heading">IP Address Information</h2>
+  <dl class="row">
+    <dt class="col-sm-3">IP Address</dt>
+    <dd class="col-sm-9">{{ipInfo?.ip}}</dd>
+
+    <dt class="col-sm-3">Est. Lat/Lng</dt>
+    <dd class="col-sm-9">{{ipInfo?.latitude}}, {{ipInfo?.longitude}}</dd>
+
+    <dt class="col-sm-3">Internet Provider</dt>
+    <dd class="col-sm-9">{{ipInfo?.asn?.name}}</dd>
+
+    <dt class="col-sm-3">City</dt>
+    <dd class="col-sm-9">{{ipInfo?.city}}</dd>
+
+    <dt class="col-sm-3">Country</dt>
+    <dd class="col-sm-9">{{ipInfo?.country_name}}</dd>
+
+    <dt class="col-sm-3">Threat Assessment</dt>
+    <dd class="col-sm-9">
+      <div class="text-dark" *ngIf="!isThreat">No Threats Found. The client's IP Address seems to be clean.</div>
+      <div class="text-danger" *ngIf="isThreat">The client's IP Address might be malicious!</div>
+    </dd>
+  </dl>
+</div>
+<hr>

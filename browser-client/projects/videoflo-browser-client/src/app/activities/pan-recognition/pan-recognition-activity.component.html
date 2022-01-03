@@ -1,0 +1,91 @@
+<mat-card class="workflow-item-card">
+  <mat-card-header>
+    <mat-card-title>{{ config.title }}</mat-card-title>
+    <mat-card-subtitle>{{ config.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="center-table" style="margin: 10px 0">
+      <tr>
+        <td style="width: 50%; text-align: center">
+          <videoflo-image-capture
+            #panImageCapture
+            [activityConfig]="activity"
+            [imageSource]="config.image"
+            [isApprover]="shouldDisplayResults"
+            (beginImageCapture)="onPanImageCapture()"
+            (imageCaptured)="onPanImageCaptured($event)"
+          >
+          </videoflo-image-capture>
+        </td>
+      </tr>
+    </table>
+    <table class="table is-striped" *ngIf="panRecognitionCompleted">
+      <tr>
+        <td>Face</td>
+        <td>
+          <div
+            *ngIf="panRecognitionResult?.face_image; else noFaceImg"
+            style="cursor: pointer"
+            (click)="showImageDialog('data:image/png;base64,' + panRecognitionResult?.face_image, 'Photo on PAN Card')"
+          >
+            <img src="data:image/png;base64,{{ panRecognitionResult?.face_image }}" alt="" class="img-thumbnail" />
+          </div>
+          <ng-template #noFaceImg>
+            <p>Photo unavailable!</p>
+          </ng-template>
+        </td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>{{ panRecognitionResult?.name }}</td>
+      </tr>
+      <tr>
+        <td>Date Of Birth</td>
+        <td>{{ panRecognitionResult?.dob }}</td>
+      </tr>
+      <tr>
+        <td>Father name</td>
+        <td>{{ panRecognitionResult?.father_name }}</td>
+      </tr>
+      <tr></tr>
+      <tr>
+        <td>Pan number</td>
+        <td>{{ panRecognitionResult?.pan_num }}</td>
+      </tr>
+      <tr>
+        <td>Cropped PAN Card</td>
+        <td>
+          <div
+            *ngIf="panRecognitionResult?.pan_image; else noPanImg"
+            style="cursor: pointer"
+            (click)="showImageDialog('data:image/png;base64,' + panRecognitionResult?.pan_image, 'Cropped PAN Card')"
+          >
+            <img src="data:image/png;base64,{{ panRecognitionResult?.pan_image }}" class="img-thumbnail" />
+          </div>
+          <ng-template #noPanImg>
+            <p class="text-danger">PAN Card Image Unavailable!</p>
+          </ng-template>
+        </td>
+      </tr>
+      <tr>
+        <td>Signature</td>
+        <td>
+          <div
+            *ngIf="panRecognitionResult?.signature_image; else noSignImg"
+            style="cursor: pointer"
+            (click)="showImageDialog('data:image/png;base64,' + panRecognitionResult?.signature_image, 'Signature')"
+          >
+            <img src="data:image/png;base64,{{ panRecognitionResult?.signature_image }}" alt="" class="img-thumbnail" />
+          </div>
+          <ng-template #noSignImg>
+            <p>Signature Unavailable!</p>
+          </ng-template>
+        </td>
+      </tr>
+    </table>
+  </mat-card-content>
+  <mat-card-actions *ngIf="shouldDisplayResults">
+    <button *ngIf="panRecognitionCompleted" mat-raised-button color="warn" (click)="onRejectClicked()">Reject</button>
+    <button mat-raised-button color="primary" (click)="onNextClicked()" *ngIf="panRecognitionCompleted">Next</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,183 @@
+.operations-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+}
+
+.operations-bg {
+  background-color: rgba(196, 196, 196, 0.75);
+  display: flex;
+  flex-direction: row;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.icon-styles-active {
+  color: white;
+  background-color: #505457;
+  font-size: 40px;
+}
+
+.icon-styles-inactive {
+  color: white;
+  background-color: red;
+  font-size: 40px;
+}
+
+.icon-holder {
+  cursor: pointer;
+  margin: 0 15px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.call-hangup-holder {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 0 15px;
+  cursor: pointer;
+  background-color: red;
+}
+
+.icon-size {
+  font-size: 40px;
+  padding: 5px 5px;
+}
+
+.call-hangup-holder:hover {
+  background-color: #c43636;
+}
+
+/* Samsung Galaxy S4/5 and Note 3 portrait*/
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+  .operations-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    top: 44%;
+    left: 29%;
+  }
+
+  .icon-size {
+    font-size: 20px;
+    padding: 5px 5px;
+  }
+
+  .icon-holder {
+    cursor: pointer;
+    margin: 0 7px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  .call-hangup-holder {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin: 0 7px;
+    cursor: pointer;
+    background-color: red;
+  }
+}
+
+/* Samsung Galaxy S4/5 and Note 3 landscape*/
+@media screen and (device-width: 640px) and (device-height: 360px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape) {
+  .operations-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    top: 90%;
+    left: 23%;
+  }
+
+  .icon-holder {
+    cursor: pointer;
+    margin: 0 15px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  .icon-size {
+    font-size: 20px;
+    padding: 5px 5px;
+  }
+
+  .call-hangup-holder {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin: 0 15px;
+    cursor: pointer;
+    background-color: red;
+  }
+}
+
+/* Ipad pro portrait*/
+@media only screen and (min-device-width: 834px) and (max-device-width: 1112px) and (-webkit-min-device-pixel-ratio: 2) {
+  .operations-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    top: 42%;
+    left: 42%;
+  }
+
+  .icon-holder {
+    cursor: pointer;
+    margin: 0 15px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  .call-hangup-holder {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 15px;
+    cursor: pointer;
+    background-color: red;
+  }
+}
+
+/* Ipad pro landscape*/
+@media only screen and (min-device-width: 1366px) and (max-device-width: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+  .operations-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    top: 90%;
+    left: 29%;
+  }
+
+  .icon-holder {
+    cursor: pointer;
+    margin: 0 15px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  .call-hangup-holder {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 15px;
+    cursor: pointer;
+    background-color: red;
+  }
+}

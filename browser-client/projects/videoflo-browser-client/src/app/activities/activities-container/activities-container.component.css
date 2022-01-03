@@ -1,0 +1,17 @@
+#workflowActivitiesContainer {
+  overflow: auto;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6b6b6b;
+}
+
+.chatComponentLight ::-webkit-scrollbar-thumb {
+  background-color: #eeeeee !important;
+}

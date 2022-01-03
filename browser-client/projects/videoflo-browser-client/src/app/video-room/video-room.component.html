@@ -1,0 +1,51 @@
+<div *ngIf="!!ovSettings" id="video-room-container" [class.boundsLight]="lightTheme">
+  <videoflo-room-config *ngIf="showConfigRoomCard" [ovSettings]="ovSettings" [externalConfig]="externalConfig"
+    (join)="onConfigRoomJoin()" (leaveSession)="leaveSession($event)" (publisherCreated)="emitPublisher($event)">
+  </videoflo-room-config>
+
+  <div *ngIf="localUsers && localUsers.length > 0">
+    <div *ngIf="isConnectionLost" class="reconnecting-container"></div>
+
+    <div id="video-container" class="video-container">
+      <div id="layout" class="bounds" [style.bottom]="(ovSettings | hasFooter) ? '25px' : '0px'"
+        [class.boundsLight]="lightTheme">
+        <div class="OT_root OT_publisher custom-class {{videoSizeClass(localUser)}}" id="localUser"
+          *ngFor="let localUser of localUsers">
+          <stream-component [user]="localUser" [videoSizeBig]="localUser.videoSizeBig"
+            (replaceScreenTrackClicked)="onReplaceScreenTrack($event)"
+            (toggleVideoSizeClicked)="onToggleVideoSize($event)"></stream-component>
+        </div>
+
+        <div *ngFor="let user of remoteUsers" class="OT_root OT_publisher custom-class {{videoSizeClass(user)}}"
+          id="remoteUsers">
+          <stream-component [user]="user" [videoSizeBig]="user.videoSizeBig"
+            (toggleVideoSizeClicked)="onToggleVideoSize($event)"></stream-component>
+        </div>
+      </div>
+
+      <videoflo-toolbar *ngIf="ovSettings | hasToolbar" [lightTheme]="lightTheme" [ovSettings]="ovSettings"
+        [hasVideoDevices]="hasVideoDevices" [hasAudioDevices]="hasAudioDevices"
+        [isWebcamAudioEnabled]="toolbarMicIconEnabled()" [isAutoLayout]="isAutoLayout"
+        [isConnectionLost]="isConnectionLost" (camButtonClicked)="toggleCam()" (micButtonClicked)="toggleMic()"
+        (screenShareClicked)="toggleScreenShare()" (layoutButtonClicked)="toggleSpeakerLayout()"
+        (leaveSessionButtonClicked)="leaveSession($event)"></videoflo-toolbar>
+    </div>
+
+    <div id="side-bar" class="side-bar-container" fullscreen>
+      <videoflo-workflow-activities-container #activitiesContainer [lightTheme]="lightTheme"
+        (workflowEnded)="leaveSession($event)"></videoflo-workflow-activities-container>
+      <!-- <mat-tab-group class="mat-tab-class">
+        <mat-tab label="Activities">
+          <videoflo-workflow-activities-container #activitiesContainer [lightTheme]="lightTheme"
+            (workflowEnded)="leaveSession($event)"></videoflo-workflow-activities-container>
+        </mat-tab>
+        <mat-tab label="Chat">
+          <chat-component #chatComponent [lightTheme]="lightTheme"></chat-component>
+        </mat-tab>
+      </mat-tab-group> -->
+    </div>
+
+    <videoflo-footer *ngIf="ovSettings | hasFooter" [lightTheme]="lightTheme" [participants]="participantsNameList">
+    </videoflo-footer>
+  </div>
+</div>

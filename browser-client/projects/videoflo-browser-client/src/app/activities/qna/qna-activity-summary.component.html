@@ -1,0 +1,21 @@
+<div class="alert alert-light">
+  <h2 class="alert-heading">Q&A Responses</h2>
+
+  <div class="alert alert-success alert-has-icon" *ngIf="correctAnswers > 0">
+    <div class="alert-icon"><i class="far fa-check-circle"></i></div>
+    <div class="alert-body">
+      <div class="alert-title">
+        {{ correctAnswers }} of {{ totalAnswers }} were correct.
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger alert-has-icon" *ngIf="incorrectAnswers > 0">
+    <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+    <div class="alert-body">
+      <div class="alert-title">
+        {{ incorrectAnswers }} of {{ totalAnswers }} were incorrect.
+      </div>
+    </div>
+  </div>
+</div>

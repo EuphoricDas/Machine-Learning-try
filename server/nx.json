@@ -1,0 +1,77 @@
+{
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "npmScope": "@botaiml/videoflo",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "projects": {
+    "admin-console-backend": {
+      "tags": []
+    },
+    "admin-console-frontend": {
+      "tags": []
+    },
+    "admin-console-frontend-e2e": {
+      "tags": [],
+      "implicitDependencies": ["admin-console-frontend"]
+    },
+    "api": {
+      "tags": [],
+      "implicitDependencies": ["api-interfaces", "entities"]
+    },
+    "api-interfaces": {
+      "tags": []
+    },
+    "common-controllers": {
+      "tags": []
+    },
+    "customer-console-backend": {
+      "tags": []
+    },
+    "customer-console-frontend": {
+      "tags": []
+    },
+    "customer-console-frontend-e2e": {
+      "tags": [],
+      "implicitDependencies": ["customer-console-frontend"]
+    },
+    "decorators": {
+      "tags": []
+    },
+    "entities": {
+      "tags": []
+    },
+    "users-service": {
+      "tags": []
+    },
+    "util-server": {
+      "tags": []
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  }
+}

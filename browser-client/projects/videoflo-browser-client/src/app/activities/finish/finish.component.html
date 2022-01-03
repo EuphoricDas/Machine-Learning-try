@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Workflow Completed</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+    <hr />
+  </mat-card-header>
+  <mat-card-content>
+    <ng-template dynamicComponentHost></ng-template>
+  </mat-card-content>
+  <mat-card-actions *ngIf="isAgent">
+    <button mat-raised-button color="warn" (click)="onReject()">Reject</button>
+    <button mat-raised-button color="primary" (click)="onAccept()">Accept &amp; Finish</button>
+  </mat-card-actions>
+</mat-card>

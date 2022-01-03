@@ -1,0 +1,65 @@
+<app-content>
+  <p-confirmDialog></p-confirmDialog>
+  <p-messages></p-messages>
+  <section class="section">
+    <div class="section-header">
+      <h1>Projects</h1>
+    </div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="card author-box card-success">
+            <div class="card-body p-0">
+              <p-table #dt [columns]="cols" [value]="projects" [lazy]="true"
+                       (onLazyLoad)="loadProjects($event)" [totalRecords]="totalRecords" [paginator]="true"
+                       [rowsPerPageOptions]="[10,15,20,25,50,100]" [rows]="10" [showLoader]="true"
+                       sortField="name" [loading]="loading" [sortOrder]="1">
+                <ng-template pTemplate="caption">
+                  <div class="row">
+                    <div class="col-lg-10 text-left">
+                      <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="fa fa-search"></i></div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search by Id or Name"
+                               (input)="dt.filterGlobal($event, 'contains')">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                      <a class="btn btn-outline btn-outline-primary btn-block" (click)="newProject()" ><i class="pi pi-file"></i> Add New Project</a>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                      {{col.header}}
+                    </th>
+                    <th style="width: 50px;">&nbsp;</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr>
+                    <td>
+                      {{getNavigationPropertyData(rowData, 'id')}}
+                    </td>
+                    <td>
+                      {{getNavigationPropertyData(rowData, 'name')}}
+                    </td>
+                    <td style="width: 50px;">
+                      <a class="btn btn-sm btn-outline btn-outline-info" (click)="changeProject(getNavigationPropertyData(rowData, 'id'))"><i class="fa fa-edit"></i></a>
+                    </td>
+                    <td style="width: 30px;">
+                      <a class="btn btn-sm btn-outline btn-outline-info" (click)="confirmDelete(getNavigationPropertyData(rowData, 'id'))"><i class="fa fa-trash"></i></a>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-content>

@@ -1,0 +1,15 @@
+<div class="dropdown profile-element">
+  <img alt="Videoflo" src="/assets/img/videoflo-logo-128x128.png">
+
+  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+    <span class="block m-t-xs font-bold">{{loggedInUser?.name}}</span>
+    <span class="text-muted text-xs block">{{currentProject.name}} <b class="caret"></b></span>
+  </a>
+  <ul class="dropdown-menu animated fadeInRight m-t-xs">
+    <li *ngFor="let p of projects"><a class="dropdown-item" (click)="changeProject(p.id)">{{p.name}}</a></li>
+    <li *ngIf="projects.length > 0" class="dropdown-divider"></li>
+    <li><a class="dropdown-item" [routerLink]="['/console', 'project-settings']">Settings</a></li>
+    <li class="dropdown-divider"></li>
+    <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+  </ul>
+</div>

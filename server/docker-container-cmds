@@ -1,0 +1,3 @@
+docker run --restart=always --name videoflo-redis -p 6379:6379 -d redis
+docker run --restart=always --name videoflo-mongo -p 27017:27017 -d mongo:bionic
+docker run --restart=always --name videoflo-postgres -p 5432:5432 -e POSTGRES_PASSWORD=Videoflo04@zur3 -d postgres

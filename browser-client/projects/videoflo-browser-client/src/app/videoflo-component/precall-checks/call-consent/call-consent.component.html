@@ -1,0 +1,29 @@
+<form [formGroup]="consentForm" (ngSubmit)="onConsentFormSubmit()">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title *ngIf="!!consentConfig?.title">{{ consentConfig?.title }}</mat-card-title>
+			<mat-card-subtitle *ngIf="!!consentConfig?.subTitle">{{consentConfig?.subTitle}}</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<div *ngIf="!!consentConfig?.body" [outerHTML]="consentConfig?.body"></div>
+			<mat-checkbox formControlName="agree">
+				<div [ngClass]="{ 'mat-error': f.agree.invalid && (f.agree.touched || f.agree.dirty) }">
+					<div *ngIf="!!consentConfig?.checkboxText" [outerHTML]="consentConfig?.checkboxText">
+					</div>
+					<div *ngIf="!consentConfig?.checkboxText">
+						I hereby agree to the terms &amp; conditions and authorize gathering data from my device, including but not
+						limited to geo-location, IP address, camera &amp; microphone.
+					</div>
+				</div>
+			</mat-checkbox>
+			<mat-error class="p-4 text-center" *ngIf="f.agree.invalid && (f.agree.touched || f.agree.dirty)">
+				{{consentConfig?.validationErrorText || 'You need to agree to the terms before you can continue.'}}
+			</mat-error>
+		</mat-card-content>
+		<mat-card-actions align="end">
+			<button type="submit" mat-raised-button color="primary">
+				{{consentConfig?.continueButtonText || 'Continue'}}
+			</button>
+		</mat-card-actions>
+	</mat-card>
+</form>

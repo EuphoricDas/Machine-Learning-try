@@ -1,0 +1,6 @@
+{
+  "/admin-console-backend": {
+    "target": "http://localhost:3335",
+    "secure": false
+  }
+}

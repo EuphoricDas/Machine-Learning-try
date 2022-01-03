@@ -1,0 +1,27 @@
+<div *ngIf="isImageProvider || isImageCapturer || shouldDisplayValue">
+  <h3 *ngIf="shouldDisplayValue && isImageCaptured && imageSource.caption">
+    {{ imageSource.caption }}
+  </h3>
+  <div class="img-capture-cell">
+    <div style="cursor: pointer" *ngIf="showImage" (click)="openDialog()">
+      <img src="{{ imageValue }}" alt="{{ imageSource.caption }}" class="img-thumbnail img-fluid">
+    </div>
+
+    <div [ngClass]="{'capture-btn-center': !imageValue, 'text-right': !!imageValue}">
+      <button mat-raised-button color="primary" (click)="onCameraCaptureClicked()"
+        *ngIf="imageSource.sourceType === ImageSourceType.Camera && isImageCapturer && showCaptureControl">
+        <mat-icon>photo_camera</mat-icon> Capture
+      </button>
+
+      <button mat-mini-fab color="primary" (click)="onSwitchCameraClicked()"
+        *ngIf="imageSource.sourceType === ImageSourceType.Camera && isImageProvider && showCaptureControl">
+        <mat-icon>flip_camera_android</mat-icon>
+      </button>
+
+      <ng-template [ngIf]="imageSource.sourceType === ImageSourceType.Upload && isImageProvider">
+        <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" accept="image/*" />
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "name": "@botaiml/videoflo-webcomponent",
+  "description": "Videoflo Web Component",
+  "author": "BOT AI ML Pvt. Ltd.",
+  "version": "0.2.11",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/botaiml/videoflo-sdk"
+  }
+}

@@ -1,0 +1,39 @@
+<mat-card class="workflow-item-card">
+  <mat-card-header>
+    <mat-card-title>{{ config.title }}</mat-card-title>
+    <mat-card-subtitle>{{ config.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+    <div class="row">
+      <div class="col-6 text-center">
+        <videoflo-image-capture #imageCapture1 [activityConfig]="activity" [imageSource]="config.face1"
+          [isApprover]="shouldDisplayResults" (beginImageCapture)="onFace1BeginCapture()"
+          (imageCaptured)="onFace1Captured($event)">
+        </videoflo-image-capture>
+      </div>
+      <div class="col-6 text-center">
+        <videoflo-image-capture #imageCapture2 [activityConfig]="activity" [imageSource]="config.face2"
+          [isApprover]="shouldDisplayResults" (beginImageCapture)="onFace2BeginCapture()"
+          (imageCaptured)="onFace2Captured($event)">
+        </videoflo-image-capture>
+      </div>
+    </div>
+    <pre *ngIf="!!error && !production" color="text-danger">{{error | json}}</pre>
+    <mat-progress-bar mode="indeterminate" *ngIf="comparing"></mat-progress-bar>
+    <div class="text-center pt-1 pb-1" *ngIf="compareFacesCompleted && shouldDisplayResults">
+      <h3 class="bg-success" *ngIf="faceMatchingResult?.isMatching">
+        <mat-icon style="vertical-align: middle;">check_circle_outline</mat-icon>
+        Faces match ({{faceMatchingResult.matchingPercentage.toFixed(0) }}%)
+      </h3>
+      <h3 class="bg-danger" *ngIf="!faceMatchingResult.isMatching">
+        <mat-icon style="vertical-align: middle;">error_outline</mat-icon>
+        Faces do not match
+      </h3>
+    </div>
+  </mat-card-content>
+  <mat-card-actions *ngIf="shouldDisplayResults" align="end">
+    <button *ngIf="compareFacesCompleted" mat-raised-button color="warn" (click)="onRejectClicked()">Reject</button>
+    <button mat-raised-button color="primary" (click)="onNextClicked()" *ngIf="compareFacesCompleted">Next</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,12 @@
+@media (min-width: 992px) {
+  .equal-height {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+  }
+}
+
+.panel {
+  width: 100%;
+  height: 100%;
+}

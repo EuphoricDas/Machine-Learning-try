@@ -1,0 +1,4 @@
+<videoflo-component *ngIf="isSessionDataAvailable" theme="dark" [apiUrl]="apiUrl" [token]="token"
+  [sessionId]="sessionId" [participantId]="participantId" (error)="onError($event)"
+  (leaveSession)="onLeaveSession($event)">
+</videoflo-component>

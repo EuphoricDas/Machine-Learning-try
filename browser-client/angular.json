@@ -1,0 +1,185 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "videoflo-browser-client": {
+      "root": "",
+      "sourceRoot": "projects/videoflo-browser-client/src",
+      "projectType": "application",
+      "prefix": "videoflo",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist/videoflo-browser-client",
+            "index": "projects/videoflo-browser-client/src/index.html",
+            "main": "projects/videoflo-browser-client/src/main.ts",
+            "polyfills": "projects/videoflo-browser-client/src/polyfills.ts",
+            "tsConfig": "projects/videoflo-browser-client/tsconfig.app.json",
+            "assets": ["projects/videoflo-browser-client/src/assets"],
+            "styles": [
+              "projects/videoflo-browser-client/src/assets/bootstrap.css",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/videoflo-browser-client/src/assets/opentok.css",
+              "projects/videoflo-browser-client/src/assets/styles.css"
+            ],
+            "scripts": [
+              {
+                "input": "node_modules/document-register-element/build/document-register-element.js"
+              }
+            ],
+            "allowedCommonJsDependencies": ["linkifyjs", "openvidu-browser", "rxjs", "socket.io-client"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "40kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/videoflo-browser-client/src/environments/environment.ts",
+                  "with": "projects/videoflo-browser-client/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "ci": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "40kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/videoflo-browser-client/src/environments/environment.ts",
+                  "with": "projects/videoflo-browser-client/src/environments/environment.ci.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "videoflo-browser-client:build",
+            "proxyConfig": "projects/videoflo-browser-client/src/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "videoflo-browser-client:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "videoflo-browser-client:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/videoflo-browser-client/src/test.ts",
+            "polyfills": "projects/videoflo-browser-client/src/polyfills.ts",
+            "tsConfig": "projects/videoflo-browser-client/tsconfig.spec.json",
+            "karmaConfig": "projects/videoflo-browser-client/karma.conf.js",
+            "codeCoverage": true,
+            "styles": [],
+            "scripts": [],
+            "assets": ["projects/videoflo-browser-client/src/favicon.ico", "projects/videoflo-browser-client/src/assets"],
+            "codeCoverageExclude": ["/**/*mock*.ts", "/**/openvidu-layout.ts"]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["projects/videoflo-browser-client/tsconfig.app.json", "projects/videoflo-browser-client/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "videoflo-browser-client-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "videoflo-browser-client:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "videoflo-angular": {
+      "root": "projects/videoflo-angular",
+      "sourceRoot": "projects/videoflo-angular/src",
+      "projectType": "library",
+      "prefix": "videoflo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/videoflo-angular/tsconfig.lib.json",
+            "project": "projects/videoflo-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/videoflo-angular/ng-package.prod.json",
+              "tsConfig": "projects/videoflo-angular/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/videoflo-angular/src/test.ts",
+            "tsConfig": "projects/videoflo-angular/tsconfig.spec.json",
+            "karmaConfig": "projects/videoflo-angular/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["projects/videoflo-angular/tsconfig.lib.json", "projects/videoflo-angular/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "videoflo-browser-client"
+}

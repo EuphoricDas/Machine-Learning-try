@@ -1,0 +1,13 @@
+.npmrc
+
+# Ignore files that are copied over to angular-lib at build time
+projects/videoflo-angular/src/lib/videoflo-component/**/*
+projects/videoflo-angular/src/lib/video-room/**/*
+projects/videoflo-angular/src/lib/openvidu/**/*
+projects/videoflo-angular/src/lib/activities/**/*
+projects/videoflo-angular/src/lib/api/**/*
+projects/videoflo-angular/src/lib/models/**/*
+projects/videoflo-angular/src/lib/services/**/*
+projects/videoflo-angular/src/lib/shared/**/*
+projects/videoflo-angular/src/lib/environments/**/*
+projects/videoflo-angular/assets/**/*

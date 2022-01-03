@@ -1,0 +1,8 @@
+<videoflo-precall-checks *ngIf="!isPreCallChecksCompleted" [precallChecks]="precallChecks"
+  (precallChecksCompleted)="onCurrentParticipantPrecallChecksCompleted()">
+</videoflo-precall-checks>
+
+<videoflo-video-room #videoRoom *ngIf="isPreCallChecksCompleted && isVideoInitialized" [externalConfig]="externalConfig"
+  (_error)="emitErrorEvent($event)" (_session)="emitSession($event)" (_publisher)="emitPublisher($event)"
+  (_leaveSession)="emitLeaveSessionEvent($event)" (_joinSession)="emitJoinSessionEvent($event)">
+</videoflo-video-room>

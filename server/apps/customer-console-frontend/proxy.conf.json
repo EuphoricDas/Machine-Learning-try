@@ -1,0 +1,6 @@
+{
+  "/customer-console-backend": {
+    "target": "http://localhost:3334",
+    "secure": false
+  }
+}

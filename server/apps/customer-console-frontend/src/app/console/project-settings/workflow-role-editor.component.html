@@ -1,0 +1,56 @@
+<div [formGroup]="roleFormGroup">
+  <div class="form-group p-grid">
+    <div class="p-field m-t-lg">
+      <span class="p-float-label">
+        <input pInputText formControlName="name" id="name" type="text" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.name.invalid}">
+        <label for="name">Role Name</label>
+      </span>
+    </div>
+    <div class="text-danger"
+         *ngIf="submitted && f.name.invalid && f.name.errors.required">
+      Please enter the name of the role.
+    </div>
+  </div>
+  <div class="form-group p-grid">
+    <div class="p-field m-t-lg">
+      <span class="p-float-label">
+        <input pInputText formControlName="minNoOfParticipants" id="minNoOfParticipants" type="number" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.minNoOfParticipants.invalid }">
+        <label for="name">Minimum Number of Participants in this Role</label>
+      </span>
+    </div>
+    <div class="text-danger"
+         *ngIf="submitted && f.minNoOfParticipants.invalid && f.minNoOfParticipants.errors.required">
+      Please enter the minimum number of participants for this role.
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="control-label col-1 m-t-xs">Features</label>
+    <div class="col-11">
+      <div class="p-xs">
+        <br />
+        <p-checkbox formControlName="chat" [binary]="true" label="Enable Chat"></p-checkbox>
+        &nbsp;
+        <br />
+        <p-checkbox formControlName="audio" [binary]="true" label="Enable Audio"></p-checkbox>
+        &nbsp;
+        <br />
+        <p-checkbox formControlName="video" [binary]="true" label="Enable Video"></p-checkbox>
+        &nbsp;
+        <br />
+        <p-checkbox formControlName="fullScreen" [binary]="true" label="Allow Full Screen"></p-checkbox>
+      </div>
+      <div class="p-xs">
+        <p-checkbox formControlName="screenShare" [binary]="true" label="Enable Screen Sharing"></p-checkbox>
+        &nbsp;
+        <br />
+        <p-checkbox formControlName="layoutSpeaking" [binary]="true" label="Enable Speaker Layout"></p-checkbox>
+        &nbsp;
+        <br />
+        <p-checkbox formControlName="exit" [binary]="true" label="Allow this user to Exit"></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

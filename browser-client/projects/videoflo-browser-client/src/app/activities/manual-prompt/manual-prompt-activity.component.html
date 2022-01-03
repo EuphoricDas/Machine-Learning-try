@@ -1,0 +1,14 @@
+<mat-card class="workflow-item-card" *ngIf="shouldDisplayResults">
+  <mat-card-header>
+    <mat-card-title>{{ config.title }}</mat-card-title>
+    <mat-card-subtitle>{{ config.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <button mat-raised-button color="warn" (click)="onRejectClicked()">
+      Reject
+    </button>
+    <button mat-raised-button color="primary" (click)="onNextClicked()">
+      Next
+    </button>
+  </mat-card-actions>
+</mat-card>

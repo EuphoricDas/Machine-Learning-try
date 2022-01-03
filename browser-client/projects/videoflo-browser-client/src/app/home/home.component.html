@@ -1,0 +1,92 @@
+<!-- <videoflo-precall-checks [precallChecks]="customerPrecallChecklist"></videoflo-precall-checks> -->
+
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">Videoflo Sample Client</a>
+  </nav>
+</header>
+
+<main role="main">
+  <div class="container" style="margin-top: 40px;">
+    <div *ngIf="!isVideoSessionCreated">
+      <div class="row">
+        <div class="col-lg-5 col-md-12">
+          <div class="row">
+            <mat-form-field appearance="fill" class="col-12 mt-3 mx-auto">
+              <mat-label>API URL</mat-label>
+              <input matInput [(ngModel)]="apiUrl" />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="fill" class="col-12 mt-3 mx-auto">
+              <mat-label>App ID</mat-label>
+              <input matInput [(ngModel)]="appId" />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="fill" class="col-12 mt-3 mx-auto">
+              <mat-label>Secret Key</mat-label>
+              <input matInput [(ngModel)]="secretKey" />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="fill" class="col-12 mt-3 mx-auto">
+              <mat-label>Session Name</mat-label>
+              <input matInput [(ngModel)]="sessionName" />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="fill" class="col-12 mt-3 mx-auto">
+              <mat-label>Agent Name</mat-label>
+              <input matInput [(ngModel)]="participants[0].name" />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="fill" class="col-12 mt-3 mx-auto">
+              <mat-label>Customer Name</mat-label>
+              <input matInput [(ngModel)]="participants[1].name" />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="fill" class="col-12 mt-3 mx-auto">
+              <mat-label>Webhooks</mat-label>
+              <textarea matInput rows="6" [(ngModel)]="webhooks" spellcheck="false"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-7 col-md-12">
+          <div class="row">
+            <mat-form-field appearance="fill" class="col-12 mt-3 mx-auto">
+              <mat-label>Pre-call Checks for Customer</mat-label>
+              <textarea matInput rows="17" [(ngModel)]="customerPrecallChecklist" spellcheck="false"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="fill" class="col-12 mt-3 mx-auto">
+              <mat-label>Activities</mat-label>
+              <textarea matInput rows="17" [(ngModel)]="activities" spellcheck="false"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-12">
+          <button mat-raised-button color="primary" (click)="createSession()" class="float-right">
+            Start Videoflo Session
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isVideoSessionCreated">
+      <h2>Join using the links below:</h2>
+      <div class="row">
+        <a *ngFor="let url of joinUrls; let i = index" [routerLink]="url"
+          class="col list-group-item list-group-item-action" style="text-overflow:ellipsis;overflow:hidden;">
+          <h2>{{ participants[i].name }}</h2>
+          {{ url.join('/') }}
+        </a>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,23 @@
+export abstract class WorkflowEvents {
+  static readonly onParticipantConnected = 'onParticipantConnected';
+  static readonly onParticipantDisconnected = 'onParticipantDisconnected';
+  static readonly initializeParticipantSession = 'initializeParticipantSession';
+  static readonly initializeParticipantVideoSession = 'initializeParticipantVideoSession';
+  static readonly initializeActivities = 'initializeActivities';
+  static readonly onConsentAcquired = 'onConsentAcquired';
+  static readonly onPermissionsAcquired = 'onPermissionsAcquired';
+  static readonly onPrecallCustomChecklistCompleted = 'onPrecallCustomChecklistCompleted';
+  static readonly onPrecallChecksCompleted = 'onPrecallChecksCompleted';
+  static readonly onQuorumUpdate = 'onQuorumUpdate';
+  static readonly onBeginActivity = 'onBeginActivity';
+  static readonly onActivityStateChanged = 'onActivityStateChanged';
+  static readonly onActivityDataGathered = 'onActivityDataGathered';
+  static readonly onActivityDataAvailable = 'onActivityDataAvailable';
+  static readonly onActivityAction = 'onActivityAction';
+  static readonly onActivitiesExhausted = 'onActivitiesExhausted';
+  static readonly onWorkflowFinished = 'onWorkflowFinished';
+  static readonly onRecordingAvailable = 'onRecordingAvailable';
+  static readonly onRecordingError = 'onRecordingError';
+  static readonly onCaptureImageRequest = 'onCaptureImageRequest';
+  static readonly onCaptureImageResponse = 'onCaptureImageResponse';
+}

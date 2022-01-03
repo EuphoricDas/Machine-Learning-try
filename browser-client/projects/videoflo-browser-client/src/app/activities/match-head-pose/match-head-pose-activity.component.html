@@ -1,0 +1,60 @@
+<mat-card class="workflow-item-card">
+  <mat-card-header>
+    <mat-card-title>{{ config.title }}</mat-card-title>
+    <mat-card-subtitle>{{ config.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngFor="let state of activeLivenessCheckState?.items">
+      <div *ngIf="state.isVisible">
+        <mat-divider></mat-divider>
+
+        <div class="row">
+          <div *ngIf="!!state.result || state.hasError" class="col-1 text-center pt-1">
+            <mat-icon color="primary" *ngIf="state.isSuccess">check_circle</mat-icon>
+            <mat-icon color="warn" *ngIf="state.isPoseNotMatching">cancel</mat-icon>
+            <mat-icon color="warn" *ngIf="state.hasError">error</mat-icon>
+          </div>
+          <div class="col-5">
+            <h3>
+              <span *ngIf="isGatheringData">{{ state.instruction }}</span>
+              <span *ngIf="shouldDisplayResults">{{ state.poseName }}</span>
+            </h3>
+          </div>
+          <div class="col-3 pt-1">
+            <div class="text-danger" *ngIf="!!state.result || state.hasError">
+              <span *ngIf="state.hasError">{{state.errorMessages}}</span>
+              <span *ngIf="state.isPoseNotMatching">Pose Mismatched!</span>
+            </div>
+          </div>
+          <div *ngIf="shouldDisplayResults" class="col-3 pt-1">
+            <button *ngIf="state.isCaptureButtonVisible" mat-raised-button color="primary"
+              (click)="onVerifyPoseClicked()">
+              Start
+            </button>
+
+            <span *ngIf="state.isPoseNotMatching || state.hasError">
+              <button mat-raised-button color="accent" (click)="onVerifyPoseClicked()">
+                Retry
+              </button>
+              &nbsp;
+              <button mat-raised-button color="warn" (click)="onContinueToNextPoseClicked()">
+                Continue
+              </button>
+            </span>
+            <div *ngIf="!production && !!state.error" class="text-danger">
+              {{ state.error | json }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-progress-bar *ngIf="state.isInProgress || state.isCheckingHeadPoses"
+        [mode]="state.isCheckingHeadPoses ? 'indeterminate' : 'determinate'" color="primary" [value]="state.progress">
+      </mat-progress-bar>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions *ngIf="shouldDisplayResults && activeLivenessCheckState?.allPosesCompleted" [align]="'start'">
+    <button mat-raised-button color="warn" (click)="onRejectClicked()">Reject</button>
+    <button mat-raised-button color="primary" (click)="onNextClicked()">Next</button>
+  </mat-card-actions>
+</mat-card>

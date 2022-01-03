@@ -1,0 +1,50 @@
+<div class="alert alert-light">
+  <h2 class="alert-heading">Face Recognition</h2>
+  <table style="margin:auto;width: 95%;">
+    <tr>
+      <td style="vertical-align: middle;text-align: center;">
+        <img src="{{faceRecognitionInfo?.image1?.base64Image || faceRecognitionInfo?.image1?.imageUrl}}" alt=""
+          class="img-thumbnail">
+      </td>
+      <td style="vertical-align: middle;text-align: center">
+        <img src="{{faceRecognitionInfo?.image2?.base64Image || faceRecognitionInfo?.image2?.imageUrl}}" alt=""
+          class="img-thumbnail">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div *ngIf="faceRecognitionInfo?.faceMatchingResult?.success">
+          <div class="alert alert-success alert-has-icon" *ngIf="faceRecognitionInfo?.faceMatchingResult?.isMatching">
+            <div class="alert-icon"><i class="far fa-check-circle"></i></div>
+            <div class="alert-body">
+              <div class="alert-title">Faces Match</div>
+              <h4>Distance: {{faceRecognitionInfo?.faceMatchingResult?.distance?.toFixed(2)}}
+              </h4>
+            </div>
+          </div>
+          <div class="alert alert-danger alert-has-icon" *ngIf="!faceRecognitionInfo?.faceMatchingResult?.isMatching">
+            <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="alert-body">
+              <div class="alert-title">Faces Do Not Match!</div>
+              <h4>
+                Distance: {{faceRecognitionInfo?.faceMatchingResult?.distance?.toFixed(2)}}
+                <br>
+                Should be below 1.05
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-danger alert-has-icon"
+          *ngIf="!faceRecognitionInfo?.faceMatchingResult?.success || faceRecognitionInfo?.faceMatchingResult?.errorMessage">
+          <div class="alert-icon"><i class="fas fa-exclamation-circle"></i></div>
+          <div class="alert-body">
+            <div class="alert-title">Face Match Failed!</div>
+            <h4>Error: {{faceRecognitionInfo?.faceMatchingResult?.errorCode}} -
+              {{faceRecognitionInfo?.faceMatchingResult?.errorMessage}}</h4>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
